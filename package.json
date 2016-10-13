@@ -1,0 +1,30 @@
+{
+  "name": "Puzzle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "production": "webpack -p"
+  },
+  "author": "Nazar Savytsky <sns.nazar@gmail.com> ",
+  "license": "ISC",
+  "dependencies": {
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "ramda": "^0.22.1",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.0",
+    "redux-logger": "^2.6.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.3.13",
+    "html-webpack-plugin": "^2.7.1",
+    "webpack": "^1.12.11",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
