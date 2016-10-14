@@ -69,13 +69,13 @@ export default class Card extends React.Component{
 
     // const imageBg = this.props.store.cards[this.props.cardNumber].opened ? this.props.store.cards[this.props.cardNumber].backgroundImage : '';
 
-
+    const cardSize = this.props.gameFieldSize.height / 4;
     const imageBg = this.props.store.cards[this.props.cardNumber].backgroundImage;
     const cardFlipped = this.props.store.cards[this.props.cardNumber].opened ? 'card flipped' : 'card';
-    
+    console.log(this.props.fieldSizes);
     return(
 
-      <section className="container">
+      <section className="container" style={{height:cardSize +'px',width:cardSize+'px'}}>
         <div className={cardFlipped} onClick={this.onCardClick.bind(this)}>
           <figure className="front"></figure>
           <figure className="back" style={{backgroundImage:imageBg}}></figure>

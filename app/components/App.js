@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
-import Gamefield from './Gamefield';
+import Welcome from './Welcome';
 
 function mapStateToProps(state){
 	return{
@@ -15,6 +15,6 @@ function mapDispatchToProps(dispatch){
 	
 }
 
-const App = connect(mapStateToProps,mapDispatchToProps)(Gamefield);
+const App = connect(mapStateToProps,mapDispatchToProps)(Welcome);
 
 export default App;

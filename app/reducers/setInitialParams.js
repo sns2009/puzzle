@@ -9,6 +9,8 @@ var boxValue = [];
 var previousCard = null;
 var cardsBg = [];
 var cards = {};
+var gameParams = {gameStarted: false, fieldSize: null, sameCards: null, flippedCards: null, fieldBlocked : false};
+var gameResult ={perfectGame: null, userGame: null}
 
 
 
@@ -49,7 +51,9 @@ function onlyTwoNotUnique(box){
     
 	return {
         previousCard: previousCard,
-        cards : cards
+        cards : cards,
+        gameParams : gameParams,
+        gameResult: gameResult
     }
 
 }
@@ -64,7 +68,9 @@ export default function reducer(state=initialState,action){
             console.log('card status changed in store');
             const withOpened = state.cards;
             withOpened[action.cardToChange].opened = action.status;
-            return Object.assign({},state,{cards: withOpened })    
+            return Object.assign({},state,{cards: withOpened });
+        case 'SET_SAME_CARDS':
+            return Object.assign({},state,{gameParams: {sameCards: action.sameCards}  });   
     }
     
 	return state;
