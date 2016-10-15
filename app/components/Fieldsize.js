@@ -10,6 +10,7 @@ export default class Fieldsize extends React.Component{
 
   	onChange(e){
 		const dimention = e.target.value;
+		this.props.setFieldSize(dimention);
 		const totalCards = dimention * dimention;
 		const sameCards = [];
 		if(dimention % 2 === 0){
@@ -29,7 +30,7 @@ export default class Fieldsize extends React.Component{
   		return (<div>
   			<h4>Choose game field size:</h4>
 
-				<select style={{margin: '0 auto',width:'100px'}} size="9" onChange={this.onChange.bind(this)} defaultValue="4">
+				<select style={{margin: '0 auto',width:'100px'}} size="9" onChange={this.onChange.bind(this)} >
 				    <option value="2">2x2</option>
 				    <option value="3">3x3</option>
 				    <option value="4">4x4</option>

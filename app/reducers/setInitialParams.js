@@ -1,4 +1,4 @@
-import R from 'ramda';
+import R from 'ramda'; 
 
 function generateInitialState(){
 
@@ -9,7 +9,7 @@ var boxValue = [];
 var previousCard = null;
 var cardsBg = [];
 var cards = {};
-var gameParams = {gameStarted: false, fieldSize: null, sameCards: null, flippedCards: null, fieldBlocked : false};
+var gameParams = {gameStarted: false, fieldSize: null, sameCards: null, chosenSameCard: null, flippedCards: null, fieldBlocked : false};
 var gameResult ={perfectGame: null, userGame: null}
 
 
@@ -63,14 +63,18 @@ export default function reducer(state=initialState,action){
     switch(action.type){
         case 'SET_PREVIOUS':
             console.log('previous was set to store');
-            return Object.assign({},state,{previousCard : action.previousCard});
+            return R.merge(state,{previousCard : action.previousCard});
         case 'CHANGE_CARD_STATUS':
             console.log('card status changed in store');
             const withOpened = state.cards;
             withOpened[action.cardToChange].opened = action.status;
-            return Object.assign({},state,{cards: withOpened });
+            return R.merge(state,{cards: withOpened });
+        case 'SET_FIELD_SIZE':
+            return R.merge(state,{fieldSize: action.fieldSize}  );    
         case 'SET_SAME_CARDS':
-            return Object.assign({},state,{gameParams: {sameCards: action.sameCards}  });   
+            return R.merge(state,{sameCards: action.sameCards}  );
+        case 'SAME_CARD_CHOSE':
+            return R.merge(state,{chosenSameCard: action.chosenSameCard}  );   
     }
     
 	return state;

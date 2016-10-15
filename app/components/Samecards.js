@@ -9,19 +9,21 @@ export default class Samecards extends React.Component{
   	}
 
   	onChange(e){
-		const dimention = e.target.value;
+		this.props.sameCardChose(e.target.value);
 		
 	}
 
   	render(){
-  		var sameCards = this.props.store.gameParams.sameCards.map((card)=>{
-  			return (<option value={card}>{card}</option>)
-  		})
+  		var sameCards;
+  		if(this.props.store.gameParams.sameCards != null){
+  		sameCards = this.props.store.gameParams.sameCards.map((card,i)=>{
+  			return (<option key={i} value={card}>{card}</option>)
+  		})}
   		return (<div>
   			<h4>Choose quantity of same tiles to find:</h4>
 
-				<select style={{margin: '0 auto',width:'100px'}} size="9" onChange={this.onChange.bind(this)} defaultValue="4">
-				sameCards
+				<select style={{margin: '0 auto',width:'100px'}} size="5" onChange={this.onChange.bind(this)} >
+				{sameCards}
 				</select>
   			</div>)
   	}

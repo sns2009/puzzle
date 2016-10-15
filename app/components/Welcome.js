@@ -1,6 +1,8 @@
 import React from 'react';
 import Gamefield from './Gamefield'
 import Fieldsize from './Fieldsize'
+import Samecards from './Samecards'
+import Startbutton from './Startbutton'
 
 export default class Welcome extends React.Component{
 
@@ -25,6 +27,8 @@ export default class Welcome extends React.Component{
 								<Fieldsize {...this.props} />
 
 								<Samecards {...this.props} />
+
+								<Startbutton {...this.props} />
 
 							
 					</div>
