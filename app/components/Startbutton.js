@@ -18,6 +18,8 @@ export default class Startbutton extends React.Component{
   		}else{
   			this.setState({lackOfParams :''});
   			console.log('start');
+  			this.props.startGame(true);
+  			this.props.generateGame();
   		}
   	}
 

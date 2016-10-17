@@ -9,7 +9,6 @@ export function changeCardStatus(cardToChange,status){
 		type:"CHANGE_CARD_STATUS",
 		cardToChange,
 		status
-
 	}
 }
 export function setFieldSize(fieldSize){
@@ -30,3 +29,33 @@ export function sameCardChose(chosenSameCard){
 		chosenSameCard
 	}
 }
+export function startGame(gameStarted){
+	return {
+		type:"START_GAME",
+		gameStarted
+	}
+}
+export function generateGame(){
+	return {
+		type:"GENERATE_GAME"
+	}
+}
+export function triggerGameField(status){
+	return {
+		type:"TRIGGER_GAMEFIELD",
+		status
+	}
+}
+
+export function addToCurrentlyOpened(cardId){
+	return {
+		type:"ADD_TO_CURRENTLY_OPENED",
+		cardId
+	}
+}
+export function deleteCurrentlyOpened(){
+	return {
+		type:"DELETE_CURRENTLY_OPENED"
+	}
+}
+

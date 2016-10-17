@@ -8,10 +8,12 @@ export default class Gamefield extends React.Component{
   createCards(){
     var boxes = [];
     var cardSize = this.props.gameFieldSize / 4;
-        for(var i = 0; i < Object.keys(this.props.store.cards).length; i++){
-          boxes.push( <Card key={i}  cardNumber={i} {...this.props}  /> );
+        if(this.props.store.cards != undefined){
+          for(var i = 0; i < Object.keys(this.props.store.cards).length; i++){
+            boxes.push( <Card key={i}  cardNumber={i} {...this.props}  /> );
+          }
+          return boxes;
         }
-        return boxes;
   }
 
   
