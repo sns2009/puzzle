@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import setInitialParams from './setInitialParams';
+import Gamelogic from './Gamelogic';
 
 
-export default combineReducers({setInitialParams});
+export default combineReducers({Gamelogic});

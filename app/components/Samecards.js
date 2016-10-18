@@ -14,7 +14,7 @@ export default class Samecards extends React.Component{
 	}
 
   	render(){
-  		var sameCards;
+  		let sameCards;
   		if(this.props.store.gameParams.sameCards != null){
   		sameCards = this.props.store.gameParams.sameCards.map((card,i)=>{
   			return (<option key={i} value={card}>{card}</option>)

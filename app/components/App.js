@@ -5,7 +5,7 @@ import Welcome from './Welcome';
 
 function mapStateToProps(state){
 	return{
-		store: state.setInitialParams
+		store: state.Gamelogic
 
 	}
 	

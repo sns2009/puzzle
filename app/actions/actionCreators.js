@@ -11,6 +11,12 @@ export function changeCardStatus(cardToChange,status){
 		status
 	}
 }
+export function setPrevFieldSize(prevFieldSize){
+	return {
+		type:"SET_PREV_FIELD_SIZE",
+		prevFieldSize
+	}
+}
 export function setFieldSize(fieldSize){
 	return {
 		type:"SET_FIELD_SIZE",

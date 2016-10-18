@@ -7,6 +7,7 @@ export default function reducer(state={
         cards:null,
         currentlyOpened: [],
         gameParams : {  gameStarted: false,
+                        prevFieldSize: null,
                         fieldSize: null,
                         sameCards: null,
                         chosenSameCard: null,
@@ -17,6 +18,10 @@ export default function reducer(state={
                         userGame: null}
                                         },action){
     switch(action.type){
+        case 'SET_PREV_FIELD_SIZE':
+            var newState = state;
+            newState.gameParams.prevFieldSize = action.prevFieldSize;
+            return R.merge(state,newState); 
 
         case 'SET_FIELD_SIZE':
             var newState = state;

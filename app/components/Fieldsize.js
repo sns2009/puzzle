@@ -10,9 +10,10 @@ export default class Fieldsize extends React.Component{
 
   	onChange(e){
 		const dimention = e.target.value;
-		this.props.setFieldSize(dimention);
 		const totalCards = dimention * dimention;
 		const sameCards = [];
+		this.props.setPrevFieldSize(dimention);
+		
 		if(dimention % 2 === 0){
 			for(var i=2; i<=(totalCards / 2); i+=2){
 				if(totalCards % i === 0) sameCards.push(i); 
@@ -23,23 +24,18 @@ export default class Fieldsize extends React.Component{
 			}
 		}
 		this.props.setSameCards(sameCards);
-		console.log(this.props);
 	}
 
   	render(){
+  		let options = [];
+  		for(let i = 2; i <= 10; i++){
+  			options.push((<option key={i} value={i}>{i}x{i}</option>));
+  		}
   		return (<div>
   			<h4>Choose game field size:</h4>
 
 				<select style={{margin: '0 auto',width:'100px'}} size="9" onChange={this.onChange.bind(this)} >
-				    <option value="2">2x2</option>
-				    <option value="3">3x3</option>
-				    <option value="4">4x4</option>
-				    <option value="5">5x5</option>
-				    <option value="6">6x6</option>
-				    <option value="7">7x7</option>
-				    <option value="8">8x8</option>
-				    <option value="9">9x9</option>
-				    <option value="10">10x10</option>
+				    {options}
 				</select>
   			</div>)
   	}
