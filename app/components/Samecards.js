@@ -22,7 +22,7 @@ export default class Samecards extends React.Component{
   		return (<div>
   			<h4>Choose quantity of same tiles to find:</h4>
 
-				<select style={{margin: '0 auto',width:'100px'}} size="5"  >
+				<select style={{margin: '0 auto',width:'100px'}} size="3"  >
 				{sameCards}
 				</select>
   			</div>)

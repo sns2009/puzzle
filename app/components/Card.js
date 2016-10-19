@@ -14,8 +14,6 @@ export default class Card extends React.Component{
   onCardClick(e){
     let leftOpenedCards = [];
     e.preventDefault();
-    console.log('at the beginning on click event previousCard = ', this.props.store.previousCard);
-    console.log('at the beginning on click event currentCard = ', this.props.cardNumber);
     if(this.props.store.gameParams.fieldBlocked ){
       if(!this.props.store.cards[this.props.cardNumber].opened){
       // Open card
@@ -62,11 +60,10 @@ export default class Card extends React.Component{
         }
       }
     }
-    // this.props.store.cards.forEach((el,i,array)=>{
-    //         if(el['opened'] === false) leftOpenedCards.push(array[i]);
-    //       });
+
           var cards = this.props.store.cards;
           console.log(typeof(cards))
+
           for(var index in cards) { 
             console.log(index);
              if (cards.hasOwnProperty(index)) {
@@ -77,8 +74,8 @@ export default class Card extends React.Component{
                   leftOpenedCards.push(card);
                 }
               }
-             }
-          
+             }    
+          console.log('LEFT_OPENED_CARDS');
           console.log(leftOpenedCards);
           if (this.props.store.gameParams.chosenSameCard == R.length(leftOpenedCards)){
             if (leftOpenedCards['0'].imageId ===  leftOpenedCards[''+R.length(leftOpenedCards) - 1].imageId){

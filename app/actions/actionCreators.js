@@ -23,10 +23,9 @@ export function setFieldSize(fieldSize){
 		fieldSize
 	}
 }
-export function setSameCards(sameCards){
+export function setSameCards(){
 	return {
 		type:"SET_SAME_CARDS",
-		sameCards
 	}
 }
 export function sameCardChose(chosenSameCard){

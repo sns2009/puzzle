@@ -32,7 +32,19 @@ export default function reducer(state={
 
         case 'SET_SAME_CARDS':
             var newState = state;
-            newState.gameParams.sameCards = action.sameCards;
+            let dimention = newState.gameParams.prevFieldSize;
+            const totalCards = dimention * dimention;
+            let sameCards = [];
+            if(dimention % 2 === 0){
+            for(var i=2; i<=(totalCards / 2); i+=2){
+                if(totalCards % i === 0) sameCards.push(i); 
+            } 
+            }else{
+                for(var i=3; i<=(totalCards / 3); i+=1){
+                    if(totalCards % i === 0) sameCards.push(i);
+                }
+            }
+            newState.gameParams.sameCards = sameCards;
             return R.merge(state,newState);
 
         case 'SAME_CARD_CHOSE':
@@ -55,7 +67,7 @@ export default function reducer(state={
             var randomizedCards = [];
             var cards = {};
 
-            console.log(fieldSize,chosenSameCard,cardsQuantity,imagesQuantity);
+            
             
             function getRandomInt(min, max) {
               return Math.floor(Math.random() * (max - min)) + min;
@@ -74,21 +86,19 @@ export default function reducer(state={
 
             }
 
-            console.log(randomizedCards);
-            randomizedCards.forEach((item,i)=>{
-                cards[i] = {
-                opened: false, 
-                imageId: item
-            }
+
+            cards = randomizedCards.map((item,i)=>{
+                return {
+                    opened: false, 
+                    imageId: item}
             });
-            console.log(cards);
+            
             var newState = state;
             newState.cards = cards;
             return R.merge(state,newState);
 
         case 'CHANGE_CARD_STATUS':
             const withOpened = state.cards;
-            console.log(state.cards);
             withOpened[action.cardToChange].opened = action.status;
             return R.merge(state,{cards: withOpened });
 
