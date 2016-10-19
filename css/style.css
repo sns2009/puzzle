@@ -3,6 +3,7 @@
     background: url(../images/cork-wallet.png) repeat;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 
 }
 
@@ -12,13 +13,15 @@
 }
 .gamefield{
     float: left;
-    background-color: grey;
+    background-color: #999;
     border: 1px solid black;
+    overflow: hidden;
+    box-sizing: content-box;
 }
 .container{
     position: relative;
     perspective: 800px;
-
+    overflow: hidden;
     float: left;
 }
 .card{
@@ -60,3 +63,46 @@
   transform: rotateY( 180deg );
 }
 
+
+.visible{
+  visibility: visible;
+  opacity: 1;
+  border:2px solid #000;
+}
+.hidden{
+    visibility: hidden;
+    opacity: 0;
+    border: 0px solid #000;
+    
+}
+
+#result{
+    margin-top: 15px;
+    text-align: center;
+    -webkit-transition: visibility 0s linear, opacity 4s ease;
+    -moz-transition: visibility 0s linear, opacity 4s ease;
+    transition: visibility 0s linear, opacity 4s ease;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    animation-iteration-count: 3;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+      
+}
+.animated{
+  -webkit-animation-name: pulse;
+    animation-name: pulse; 
+}
+/*
+ * Pulse animation
+*/
+@-webkit-keyframes pulse {
+    0% { -webkit-transform: scale(1); }
+    50% { -webkit-transform: scale(1.15); }
+    100% { -webkit-transform: scale(1); }
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}

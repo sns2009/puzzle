@@ -41,6 +41,12 @@ export function startGame(gameStarted){
 		gameStarted
 	}
 }
+export function gameOver(gameOver){
+	return {
+		type:"GAME_OVER",
+		gameOver
+	}
+}
 export function generateGame(){
 	return {
 		type:"GENERATE_GAME"
@@ -64,4 +70,14 @@ export function deleteCurrentlyOpened(){
 		type:"DELETE_CURRENTLY_OPENED"
 	}
 }
-
+export function setPerfectTriesNumber(perfectTriesNumber){
+	return {
+		type:"SET_PERFECT_TRIES_NUMBER",
+		perfectTriesNumber
+	}
+}
+export function incrementTries(){
+	return {
+		type:"INCREMENT_TRIES"
+	}
+}

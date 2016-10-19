@@ -7,6 +7,7 @@ export default function reducer(state={
         cards:null,
         currentlyOpened: [],
         gameParams : {  gameStarted: false,
+                        gameOver: false,
                         prevFieldSize: null,
                         fieldSize: null,
                         sameCards: null,
@@ -15,11 +16,12 @@ export default function reducer(state={
                         fieldBlocked : true},
 
         gameResult: {   perfectGame: null,
-                        userGame: null}
+                        userGame: 0}
                                         },action){
     switch(action.type){
         case 'SET_PREV_FIELD_SIZE':
             var newState = state;
+            newState.gameParams.chosenSameCard = null;
             newState.gameParams.prevFieldSize = action.prevFieldSize;
             return R.merge(state,newState); 
 
@@ -90,6 +92,11 @@ export default function reducer(state={
             withOpened[action.cardToChange].opened = action.status;
             return R.merge(state,{cards: withOpened });
 
+        case 'GAME_OVER':
+            var newState = state;
+            newState.gameParams.gameOver = action.gameOver;
+            return R.merge(state, newState);
+
         case 'TRIGGER_GAMEFIELD':
             var newState = state;
             newState.gameParams.fieldBlocked = action.status;
@@ -105,6 +112,15 @@ export default function reducer(state={
             newState.currentlyOpened = [];
             return R.merge(state,newState);
 
+        case 'SET_PERFECT_TRIES_NUMBER':
+            var newState = state;
+            newState.gameResult.perfectGame = action.perfectTriesNumber - 1;
+            return R.merge(state,newState);        
+
+        case 'INCREMENT_TRIES':
+            var newState = state;
+            newState.gameResult.userGame++;
+            return R.merge(state,newState);
     }
 	return state;
 }

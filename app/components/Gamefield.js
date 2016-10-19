@@ -18,7 +18,8 @@ export default class Gamefield extends React.Component{
   
 
   render(){
-    var gameFieldCont = (<div>WELCOME</div>);
+    var gameFieldCont = (<div style={{textAlign:'center',lineHeight:this.props.gameFieldSize.height/2+'px'}}><h2>WELCOME</h2>
+      <p>Choose game params &#8594;</p></div>);
     if (this.props.store.gameParams.gameStarted) gameFieldCont = this.createCards();
 
     return (<div className="gamefield" style={this.props.gameFieldSize}>

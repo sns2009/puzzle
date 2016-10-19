@@ -34,6 +34,7 @@ export default class Card extends React.Component{
       // If in currently opened cards some bg differs from other(s) 
       //- block gamefield and CLOSE cards, after anblack gamefield
 
+      // If 
           
           if (this.props.store.cards[this.props.store.currentlyOpened[0]].imageId != 
             this.props.store.cards[this.props.store.currentlyOpened[this.props.store.currentlyOpened.length - 1]].imageId){
@@ -43,6 +44,7 @@ export default class Card extends React.Component{
               this.props.changeCardStatus(el,false);
             })
             this.props.deleteCurrentlyOpened();
+            this.props.incrementTries();
             this.props.triggerGameField(true);
               
             },1000);
@@ -50,6 +52,7 @@ export default class Card extends React.Component{
           }else {
             if( (R.length(this.props.store.currentlyOpened)) == this.props.store.gameParams.chosenSameCard){
               this.props.deleteCurrentlyOpened();
+              this.props.incrementTries();
             }
           }
           
@@ -84,11 +87,13 @@ export default class Card extends React.Component{
             setTimeout(()=>{
             leftOpenedCards.forEach((el,i,array)=>{
               this.props.changeCardStatus(el.id,true);
+
             })
-            
             this.props.triggerGameField(true);
               
             },1000);
+            this.props.gameOver(true);
+
 
             }
           }

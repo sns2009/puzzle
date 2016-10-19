@@ -1,5 +1,6 @@
 import React from 'react';
 import Gamefield from './Gamefield'
+import Result from './Result'
 import Fieldsize from './Fieldsize'
 import Samecards from './Samecards'
 import Startbutton from './Startbutton'
@@ -21,8 +22,10 @@ export default class Welcome extends React.Component{
 				<div style={{float:'right',width: startBlockWidth - 20 +'px',height: 'auto'}}>
 					<div style={{margin: '0 auto',
 								width: '200px',
-								height:'200px',
-								display:'block'}}>
+								display:'block',
+								textAlign:'center'}}>
+
+								<Result {...this.props} />
 
 								<Fieldsize {...this.props} />
 
@@ -38,7 +41,7 @@ export default class Welcome extends React.Component{
 			}
 		}
 Welcome.defaultProps = {
-	gameFieldSize : {width:document.documentElement.clientHeight,
-							height:document.documentElement.clientHeight},
+	gameFieldSize : {width:document.documentElement.clientHeight - 2,
+							height:document.documentElement.clientHeight - 2},
 	windowWidth: document.documentElement.clientWidth
 }
