@@ -14,7 +14,7 @@ export default class Startbutton extends React.Component{
   	start(){
   		
   		if((this.props.store.gameParams.sameCards === null) || (this.props.store.gameParams.chosenSameCard === null)){
-  			this.setState({lackOfParams :'Choose game settings below'});
+  			this.setState({lackOfParams :'Choose game settings above'});
   		}else{
   			this.setState({lackOfParams :''});
         this.props.setFieldSize(this.props.store.gameParams.prevFieldSize);
@@ -37,7 +37,7 @@ export default class Startbutton extends React.Component{
   			Here we go!
   			</button>
 
-  			<div style={{color:'red'}}>{this.state.lackOfParams}</div>
+  			<div style={{color:'red',marginTop:'15px'}}>{this.state.lackOfParams}</div>
 
   			</div>)
   	}

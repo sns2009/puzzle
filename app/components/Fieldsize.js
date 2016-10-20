@@ -23,7 +23,7 @@ export default class Fieldsize extends React.Component{
   		return (<div>
   			<h4>Choose game field size:</h4>
 
-				<select style={{margin: '0 auto',width:'100px'}} size="5" onChange={this.onChange.bind(this)} >
+				<select style={{margin: '0 auto',width:'100px'}} size="4" onChange={this.onChange.bind(this)} >
 				    {options}
 				</select>
   			</div>)

@@ -19,7 +19,7 @@ export default class Card extends React.Component{
       // Open card
       this.props.changeCardStatus(this.props.cardNumber, true);
       // Add card to currently opened cards
-        if(this.props.store.currentlyOpened[this.props.store.currentlyOpened.length - 1] != this.props.cardNumber){
+        if(this.props.store.currentlyOpened[R.length(this.props.store.currentlyOpened) - 1] !== this.props.cardNumber){
         this.props.addToCurrentlyOpened(this.props.cardNumber);
 
 
@@ -34,8 +34,8 @@ export default class Card extends React.Component{
 
       // If 
           
-          if (this.props.store.cards[this.props.store.currentlyOpened[0]].imageId != 
-            this.props.store.cards[this.props.store.currentlyOpened[this.props.store.currentlyOpened.length - 1]].imageId){
+          if (this.props.store.cards[this.props.store.currentlyOpened[0]].imageId !==
+            this.props.store.cards[this.props.store.currentlyOpened[R.length(this.props.store.currentlyOpened) - 1]].imageId){
             this.props.triggerGameField(false);
             setTimeout(()=>{
             this.props.store.currentlyOpened.forEach((el,i)=>{

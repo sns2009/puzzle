@@ -14,7 +14,7 @@ export default class Welcome extends React.Component{
 
 	
 	render(){
-		var startBlockWidth = this.props.windowWidth - this.props.gameFieldSize.width;
+		let startBlockWidth = this.props.windowWidth - this.props.gameFieldSize.width;
 
 		return(
 			<div className ="app clearfix">
