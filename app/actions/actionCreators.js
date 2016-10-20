@@ -80,3 +80,8 @@ export function incrementTries(){
 		type:"INCREMENT_TRIES"
 	}
 }
+export function resetTries(){
+	return {
+		type:"RESET_TRIES"
+	}
+}

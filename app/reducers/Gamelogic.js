@@ -131,6 +131,11 @@ export default function reducer(state={
             var newState = state;
             newState.gameResult.userGame++;
             return R.merge(state,newState);
+
+        case 'RESET_TRIES':
+            var newState = state;
+            newState.gameResult.userGame = 0;
+            return R.merge(state,newState);
     }
 	return state;
 }

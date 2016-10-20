@@ -20,8 +20,12 @@ export default class Startbutton extends React.Component{
         this.props.setFieldSize(this.props.store.gameParams.prevFieldSize);
   			this.props.startGame(true);
         this.props.gameOver(false);
+        let options = document.getElementById('sameCards').children;
+        [].forEach.call(options,(el)=>{el.selected = false;});
         this.props.setPerfectTriesNumber(this.props.store.gameParams.fieldSize * this.props.store.gameParams.fieldSize / this.props.store.gameParams.chosenSameCard);
-  			this.props.generateGame();
+  			this.props.resetTries();
+        this.props.deleteCurrentlyOpened();
+        this.props.generateGame();
   		}
   	}
 

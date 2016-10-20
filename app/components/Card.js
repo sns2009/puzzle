@@ -61,28 +61,20 @@ export default class Card extends React.Component{
       }
     }
 
-          var cards = this.props.store.cards;
-          console.log(typeof(cards))
-
-          for(var index in cards) { 
-            console.log(index);
-             if (cards.hasOwnProperty(index)) {
-                 let card = cards[index];
-
-                if(card['opened'] === false) {
-                  card.id = index;
-                  leftOpenedCards.push(card);
-                }
-              }
-             }    
-          console.log('LEFT_OPENED_CARDS');
-          console.log(leftOpenedCards);
+          let cards = this.props.store.cards;
+          let leftClosed = function(el,i,arr){
+            if(el['opened'] === false){ 
+              el['id'] = i;
+              return el;
+            }
+          };
+          leftOpenedCards = cards.filter(leftClosed);
           if (this.props.store.gameParams.chosenSameCard == R.length(leftOpenedCards)){
             if (leftOpenedCards['0'].imageId ===  leftOpenedCards[''+R.length(leftOpenedCards) - 1].imageId){
           
             this.props.triggerGameField(false);
             setTimeout(()=>{
-            leftOpenedCards.forEach((el,i,array)=>{
+            leftOpenedCards.forEach((el)=>{
               this.props.changeCardStatus(el.id,true);
 
             })

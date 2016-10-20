@@ -6,12 +6,15 @@ import Card from './Card';
 export default class Gamefield extends React.Component{
 
   createCards(){
-    var boxes = [];
+    let cards = this.props.store.cards;
+    let boxes = cards.map((el,i)=>{
+      return ( <Card key={i}  cardNumber={i} {...this.props}  /> )
+    });
         
-          for(var i = 0; i < Object.keys(this.props.store.cards).length; i++){
-            boxes.push( <Card key={i}  cardNumber={i} {...this.props}  /> );
-          }
-          return boxes;
+          // for(var i = 0; i < Object.keys(this.props.store.cards).length; i++){
+          //   boxes.push( <Card key={i}  cardNumber={i} {...this.props}  /> );
+          // }
+          // return boxes;
         
   }
 
