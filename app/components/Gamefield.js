@@ -10,11 +10,11 @@ export default class Gamefield extends React.Component{
     let boxes = cards.map((el,i)=>{
       return ( <Card key={i}  cardNumber={i} {...this.props}  /> )
     });
-        
+    // console.log(boxes);    
           // for(var i = 0; i < Object.keys(this.props.store.cards).length; i++){
           //   boxes.push( <Card key={i}  cardNumber={i} {...this.props}  /> );
           // }
-          // return boxes;
+    return boxes;
         
   }
 
