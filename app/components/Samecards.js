@@ -1,33 +1,35 @@
 import React from 'react';
+import R from 'ramda';
 
 
-export default class Samecards extends React.Component{
+export default class Samecards extends React.Component {
 
+  onChange(e) {
+    this.props.sameCardChose(+e.target.value);
+  }
 
-	constructor(props){
-    super(props);
-  	}
+  render() {
+    const sameCards = this.props.sameCards;
+    let sameCardsOption = [];
+    sameCardsOption = sameCards.map((card, i) => {
+      return (<option onClick={this.onChange.bind(this)} key={i} value={card}>{card}</option>);
+    });
 
-  	onChange(e){
-		this.props.sameCardChose(e.target.value);
-		
-	}
+    return (<div>
+      <h4>Choose quantity of same tiles to find:</h4>
 
-  	render(){
-  		let sameCards = [];
-  		if(this.props.store.gameParams.sameCards !== null){
-  		sameCards = this.props.store.gameParams.sameCards.map((card,i,array)=>{
-  			return (<option onClick={this.onChange.bind(this)} key={i}  value={card}>{card}</option>)
-  		})}else{
-
-      }
-  		return (<div>
-  			<h4>Choose quantity of same tiles to find:</h4>
-
-				<select style={{margin: '0 auto',width:'100px'}} id="sameCards" size="2"  >
-				{sameCards}
-				</select>
-  			</div>)
-  	}
+      <select value={this.props.chosenSameCard} style={{
+        margin: '0 auto',
+        width: '100px',
+      }} id="sameCards" size="2">
+        {sameCardsOption}
+      </select>
+    </div>);
+  }
 
 }
+Samecards.propTypes = {
+  sameCards: React.PropTypes.array,
+  chosenSameCard: React.PropTypes.number,
+  sameCardChose: React.PropTypes.func,
+};

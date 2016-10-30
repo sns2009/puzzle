@@ -2,31 +2,55 @@ import React from 'react';
 import Card from './Card';
 
 
+export default class Gamefield extends React.Component {
 
-export default class Gamefield extends React.Component{
-
-  createCards(){
-    let cards = this.props.store.cards;
-    let boxes = cards.map((el,i)=>{
-      return ( <Card key={i}  cardNumber={i} {...this.props}  /> )
+  createCards() {
+    const cards = this.props.cards;
+    const boxes = cards.map((el, i) => {
+      return (<Card key={i}
+        cardNumber={i}
+        cards={this.props.cards}
+        gameParams={this.props.gameParams}
+        currentlyOpened={this.props.currentlyOpened}
+        gameFieldSize={this.props.gameFieldSize}
+        triggerGameField={this.props.triggerGameField}
+        changeCardStatus={this.props.changeCardStatus}
+        deleteCurrentlyOpened={this.props.deleteCurrentlyOpened}
+        incrementTries={this.props.incrementTries}
+        gameOver={this.props.gameOver}
+        addToCurrentlyOpened={this.props.addToCurrentlyOpened}
+        firstCardClicked={this.props.firstCardClicked}
+      />);
     });
     return boxes;
-        
   }
 
-  
-
-  render(){
-    let gameFieldCont = (<div style={{textAlign:'center',lineHeight:this.props.gameFieldSize.height/2+'px'}}><h1>WELCOME</h1>
+  render() {
+    const { gameParams } = this.props;
+    const gameFieldSize = this.props.gameFieldSize;
+    let gameFieldCont = (<div style={{ textAlign: 'center', lineHeight: `${gameFieldSize.height / 2}px` }}><h1>WELCOME</h1>
       <h2>Choose game params &#8594;</h2></div>);
-    if (this.props.store.gameParams.gameStarted) gameFieldCont = this.createCards();
+    if (gameParams.gameStarted) gameFieldCont = this.createCards();
 
-    return (<div className="gamefield" style={this.props.gameFieldSize}>
-            { 
+    return (<div className="gamefield" style={gameFieldSize}>
+      {
               gameFieldCont
               }
-    </div>)
+    </div>);
   }
 
 
 }
+Gamefield.propTypes = {
+  cards: React.PropTypes.array,
+  gameFieldSize: React.PropTypes.object,
+  gameParams: React.PropTypes.object,
+  currentlyOpened: React.PropTypes.array,
+  triggerGameField: React.PropTypes.func,
+  changeCardStatus: React.PropTypes.func,
+  deleteCurrentlyOpened: React.PropTypes.func,
+  incrementTries: React.PropTypes.func,
+  gameOver: React.PropTypes.func,
+  addToCurrentlyOpened: React.PropTypes.func,
+  firstCardClicked: React.PropTypes.func,
+};
