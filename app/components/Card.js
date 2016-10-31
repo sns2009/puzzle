@@ -1,6 +1,7 @@
 import React from 'react';
 import R from 'ramda';
 import imagePath from '../imagesPath';
+import gameConfig from '../gameConfig';
 
 
 export default class Card extends React.Component {
@@ -13,10 +14,9 @@ export default class Card extends React.Component {
 
     e.preventDefault();
     this.props.firstCardClicked(true);
-    if (gameParams.fieldBlocked) {
-      if (!cards[this.props.cardNumber].opened) {
+    if (gameParams.fieldBlocked && !cards[this.props.cardNumber].opened) {
       // Open card
-        this.props.changeCardStatus(this.props.cardNumber, true);
+        this.props.changeCardsStatus([this.props.cardNumber], true);
       // Add card to currently opened cards
         if (currentlyOpened[R.length(currentlyOpened) - 1] !== this.props.cardNumber) {
           this.props.addToCurrentlyOpened(this.props.cardNumber);
@@ -36,33 +36,31 @@ export default class Card extends React.Component {
             cards[R.last(currentlyOpened)].imageId) {
             this.props.triggerGameField(false);
             setTimeout(() => {
-              R.forEach(el => this.props.changeCardStatus(el, false), currentlyOpened);
+              this.props.changeCardsStatus(currentlyOpened,false);
               this.props.deleteCurrentlyOpened();
               this.props.incrementTries();
               this.props.triggerGameField(true);
-            }, 1000);
+            }, gameConfig.cardFlippingSpeed);
           } else if ((R.length(currentlyOpened)) === gameParams.chosenSameCardQuantity) {
             this.props.deleteCurrentlyOpened();
             this.props.incrementTries();
           }
         }
-      }
+      
     }
   
 
     leftOpenedCards = R.filter(R.propEq('opened',false), cards);
 
-    if (gameParams.chosenSameCardQuantity === R.length(leftOpenedCards)) {
-      if (R.length(R.uniq(R.pluck('imageId',leftOpenedCards))) === 1) {
+    if (gameParams.chosenSameCardQuantity === R.length(leftOpenedCards) &&
+     R.length(R.uniq(R.pluck('imageId',leftOpenedCards))) === 1) {
         this.props.triggerGameField(false);
         setTimeout(() => {
-          leftOpenedCards.forEach((el) => {
-            this.props.changeCardStatus(el.id, true);
-          });
+          this.props.changeCardsStatus(R.pluck('id',leftOpenedCards), true);
           this.props.triggerGameField(true);
-        }, 1000);
+        }, gameConfig.cardFlippingSpeed);
         this.props.gameOver(true);
-      }
+      
     }
   }
 
@@ -76,12 +74,12 @@ export default class Card extends React.Component {
       cardOpened = cardOpened.concat(' instantclosing');
       cardClosed = cardClosed.concat(' instantclosing');
     }
-    const cardFlipped = this.props.cards[this.props.cardNumber].opened ? cardOpened : cardClosed;
+    const cardStyling = this.props.cards[this.props.cardNumber].opened ? cardOpened : cardClosed;
 
     return (
 
       <section className="container" style={{ height: `${cardSize}px`, width: `${cardSize}px` }}>
-        <div className={cardFlipped} onClick={this.onCardClick.bind(this)}>
+        <div className={cardStyling} onClick={this.onCardClick.bind(this)}>
           <figure className="front" />
           <figure className="back" style={{ backgroundImage: `url(${imageBg})` }} />
         </div>
@@ -98,7 +96,7 @@ Card.propTypes = {
   currentlyOpened: React.PropTypes.array,
   gameFieldSize: React.PropTypes.object,
   triggerGameField: React.PropTypes.func,
-  changeCardStatus: React.PropTypes.func,
+  changeCardsStatus: React.PropTypes.func,
   deleteCurrentlyOpened: React.PropTypes.func,
   incrementTries: React.PropTypes.func,
   gameOver: React.PropTypes.func,

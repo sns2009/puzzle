@@ -7,10 +7,6 @@ import Startbutton from './Startbutton';
 
 export default class Welcome extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const startBlockWidth = this.props.windowWidth - this.props.gameFieldSize.width;
 
@@ -21,7 +17,7 @@ export default class Welcome extends React.Component {
           gameParams={this.props.store.gameParams}
           currentlyOpened={this.props.store.currentlyOpened}
           triggerGameField={this.props.triggerGameField}
-          changeCardStatus={this.props.changeCardStatus}
+          changeCardsStatus={this.props.changeCardsStatus}
           deleteCurrentlyOpened={this.props.deleteCurrentlyOpened}
           incrementTries={this.props.incrementTries}
           gameOver={this.props.gameOver}

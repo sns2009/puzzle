@@ -30,7 +30,10 @@ export default class Startbutton extends React.Component {
 
   	render() {
   		return (<div>
-    <button onClick={this.start.bind(this)} style={{ marginTop: '20px' }}>
+    <button onClick={this.start.bind(this)} style={{ 
+      marginTop: '20px',
+      backgroundColor: '#f2f2f2'
+     }}>
   			Here we go!
   	</button>
     <div style={{ color: 'red', marginTop: '15px' }}>{this.state.lackOfParams}</div>

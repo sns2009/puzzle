@@ -86,11 +86,14 @@ export default function reducer(state = {
       return R.merge(state, newState); }
 
     case 'CHANGE_CARD_STATUS':
-      const withOpened = state.cards;
-      withOpened[action.cardToChange].opened = action.status;
-      return R.merge(state, {
-        cards: withOpened,
-      });
+      let {cards} = state;
+      const cardsToOpen = action.cardsToChange;
+      R.forEach( cardId => {
+        cards[cardId].opened = action.status
+      },cardsToOpen);
+      let newState = state;
+      newState.cards = cards;
+      return R.merge(state, cards);
 
     case 'GAME_OVER': {
       let { gameParams } = state;

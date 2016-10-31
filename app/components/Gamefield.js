@@ -14,7 +14,7 @@ export default class Gamefield extends React.Component {
         currentlyOpened={this.props.currentlyOpened}
         gameFieldSize={this.props.gameFieldSize}
         triggerGameField={this.props.triggerGameField}
-        changeCardStatus={this.props.changeCardStatus}
+        changeCardsStatus={this.props.changeCardsStatus}
         deleteCurrentlyOpened={this.props.deleteCurrentlyOpened}
         incrementTries={this.props.incrementTries}
         gameOver={this.props.gameOver}
@@ -28,13 +28,13 @@ export default class Gamefield extends React.Component {
   render() {
     const { gameParams } = this.props;
     const gameFieldSize = this.props.gameFieldSize;
-    let gameFieldCont = (<div style={{ textAlign: 'center', lineHeight: `${gameFieldSize.height / 2}px` }}><h1>WELCOME</h1>
+    let gameFieldContainer = (<div style={{ textAlign: 'center', lineHeight: `${gameFieldSize.height / 2}px` }}><h1>WELCOME</h1>
       <h2>Choose game params &#8594;</h2></div>);
-    if (gameParams.gameStarted) gameFieldCont = this.createCards();
+    if (gameParams.gameStarted) gameFieldContainer = this.createCards();
 
     return (<div className="gamefield" style={gameFieldSize}>
       {
-              gameFieldCont
+              gameFieldContainer
               }
     </div>);
   }
@@ -47,7 +47,7 @@ Gamefield.propTypes = {
   gameParams: React.PropTypes.object,
   currentlyOpened: React.PropTypes.array,
   triggerGameField: React.PropTypes.func,
-  changeCardStatus: React.PropTypes.func,
+  changeCardsStatus: React.PropTypes.func,
   deleteCurrentlyOpened: React.PropTypes.func,
   incrementTries: React.PropTypes.func,
   gameOver: React.PropTypes.func,
