@@ -13,14 +13,14 @@ export default class Startbutton extends React.Component {
 
   	start() {
     const { gameParams } = this.props;
-  		if (R.isEmpty(gameParams.sameCards) || R.isNil(gameParams.chosenSameCard)) {
+  		if (R.isEmpty(gameParams.sameCards) || R.isNil(gameParams.chosenSameCardQuantity)) {
   			this.setState({ lackOfParams: 'Choose game settings above' });
   		} else {
   			this.setState({ lackOfParams: '' });
     this.props.setFieldSize(gameParams.prevFieldSize);
   			this.props.startGame(true);
     this.props.gameOver(false);
-    this.props.setPerfectTriesNumber(gameParams.fieldSize * gameParams.fieldSize / gameParams.chosenSameCard);
+    this.props.setPerfectTriesNumber(gameParams.fieldSize * gameParams.fieldSize / gameParams.chosenSameCardQuantity);
   			this.props.resetTries();
     this.props.deleteCurrentlyOpened();
     this.props.firstCardClicked(false);

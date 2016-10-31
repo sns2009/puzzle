@@ -10,7 +10,7 @@ export default function reducer(state = {
     prevFieldSize: null,
     fieldSize: null,
     sameCards: [],
-    chosenSameCard: null,
+    chosenSameCardQuantity: null,
     fieldBlocked: true,
     firstCardCliked: false,
   },
@@ -21,75 +21,69 @@ export default function reducer(state = {
   },
 }, action) {
   switch (action.type) {
-    case 'SET_PREV_FIELD_SIZE':
-      let newState = state;
-      newState.gameParams.prevFieldSize = action.prevFieldSize;
-      return R.merge(state, newState);
+    case 'SET_PREV_FIELD_SIZE': {
+      let { gameParams } = state;
+      gameParams.prevFieldSize = action.prevFieldSize;
+      return R.merge(state,gameParams); }
 
-    case 'SET_FIELD_SIZE':
-      newState = state;
-      newState.gameParams.fieldSize = action.fieldSize;
-      return R.merge(state, newState);
+    case 'SET_FIELD_SIZE': {
+      let { gameParams } = state;
+      gameParams.fieldSize = action.fieldSize;
+      return R.merge(state,gameParams); }
 
-    case 'SET_SAME_CARDS':
-      newState = state;
-      const dimention = newState.gameParams.prevFieldSize;
+    case 'SET_SAME_CARDS': {
+      let { gameParams } = state;
+      const dimention = gameParams.prevFieldSize;
       const totalCards = dimention * dimention;
       let sameCards = [];
+      const sameCardsFiltred = R.filter((i) => totalCards % i === 0);
       if (dimention % 2 === 0) {
-        const sameCardsFiltred = R.filter((i) => {
-          if (totalCards % i === 0) return i;
-        });
         sameCards = sameCardsFiltred(R.range(2, (totalCards / 2) + 1));
       } else {
-        const sameCardsFiltred = R.filter((i) => {
-          if (totalCards % i === 0) return i;
-        });
         sameCards = sameCardsFiltred(R.range(3, totalCards));
       }
 
-      newState.gameParams.sameCards = sameCards;
-      newState.gameParams.chosenSameCard = sameCards[0];
-      return R.merge(state, newState);
+      gameParams.sameCards = sameCards;
+      gameParams.chosenSameCardQuantity = sameCards[0];
+      return R.merge(state, gameParams); }
 
-    case 'SAME_CARD_CHOSE':
-      newState = state;
-      newState.gameParams.chosenSameCard = action.chosenSameCard;
-      return R.merge(state, newState);
+    case 'SAME_CARD_CHOSE': {
+      let { gameParams } = state;
+      gameParams.chosenSameCardQuantity = action.chosenSameCardQuantity;
+      return R.merge(state, gameParams); }
 
-    case 'START_GAME':
-      newState = state;
-      newState.gameParams.gameStarted = action.gameStarted;
-      return R.merge(state, newState);
+    case 'START_GAME': {
+      let { gameParams } = state;
+      gameParams.gameStarted = action.gameStarted;
+      return R.merge(state, gameParams); }
 
-    case 'GENERATE_GAME':
+    case 'GENERATE_GAME': {
       const fieldSize = state.gameParams.fieldSize;
-      const chosenSameCard = state.gameParams.chosenSameCard;
+      const chosenSameCardQuantity = state.gameParams.chosenSameCardQuantity;
       const cardsQuantity = fieldSize * fieldSize;
-      const imagesQuantity = cardsQuantity / chosenSameCard;
-      let allCardsValues = [];
-      let randomizedCards = [];
+      const imagesQuantity = cardsQuantity / chosenSameCardQuantity;
+      let allImagesValues = [];
+      let randomizedImages = [];
       let cards = [];
+      const mapIndexed = R.addIndex(R.map);
 
+      allImagesValues = R.flatten(
+        R.repeat(R.range(0, imagesQuantity), chosenSameCardQuantity)
+        )
 
-      allCardsValues = R.flatten(
-        R.map((image) => {
-          return R.repeat(image, chosenSameCard);
-        }, R.range(0, imagesQuantity))
-      );
+      randomizedImages = shuffle(allImagesValues);
 
-      randomizedCards = shuffle(allCardsValues);
-
-      cards = R.map((item) => {
+      cards = mapIndexed((item,i) => {
         return {
+          id: i,
           opened: false,
-          imageId: item,
+          imageId: item
         };
-      }, randomizedCards);
+      }, randomizedImages);
 
-      newState = state;
+      let newState = state;
       newState.cards = cards;
-      return R.merge(state, newState);
+      return R.merge(state, newState); }
 
     case 'CHANGE_CARD_STATUS':
       const withOpened = state.cards;
@@ -98,45 +92,45 @@ export default function reducer(state = {
         cards: withOpened,
       });
 
-    case 'GAME_OVER':
-      newState = state;
-      newState.gameParams.gameOver = action.gameOver;
-      return R.merge(state, newState);
+    case 'GAME_OVER': {
+      let { gameParams } = state;
+      gameParams.gameOver = action.gameOver;
+      return R.merge(state, gameParams); }
 
-    case 'TRIGGER_GAMEFIELD':
-      newState = state;
-      newState.gameParams.fieldBlocked = action.status;
-      return R.merge(state, newState);
+    case 'TRIGGER_GAMEFIELD': {
+      let { gameParams } = state;
+      gameParams.fieldBlocked = action.status;
+      return R.merge(state, gameParams); }
 
-    case 'ADD_TO_CURRENTLY_OPENED':
-      newState = state;
+    case 'ADD_TO_CURRENTLY_OPENED': {
+      let newState = state;
       newState.currentlyOpened.push(action.cardId);
-      return R.merge(state, newState);
+      return R.merge(state, newState); }
 
-    case 'DELETE_CURRENTLY_OPENED':
-      newState = state;
+    case 'DELETE_CURRENTLY_OPENED': {
+      let newState = state;
       newState.currentlyOpened = [];
-      return R.merge(state, newState);
+      return R.merge(state, newState); }
 
-    case 'SET_PERFECT_TRIES_NUMBER':
-      newState = state;
-      newState.gameResult.perfectGame = action.perfectTriesNumber - 1;
-      return R.merge(state, newState);
+    case 'SET_PERFECT_TRIES_NUMBER': {
+      let { gameResult } = state;
+      gameResult.perfectGame = action.perfectTriesNumber - 1;
+      return R.merge(state, gameResult); }
 
-    case 'INCREMENT_TRIES':
-      newState = state;
-      newState.gameResult.userGame++;
-      return R.merge(state, newState);
+    case 'INCREMENT_TRIES': {
+      let { gameResult } = state;
+      gameResult.userGame++;
+      return R.merge(state, gameResult); }
 
-    case 'RESET_TRIES':
-      newState = state;
-      newState.gameResult.userGame = 0;
-      return R.merge(state, newState);
+    case 'RESET_TRIES': {
+      let { gameResult } = state;
+      gameResult.userGame = 0;
+      return R.merge(state, gameResult); }
 
-    case 'FIRST_CARD_CLICKED':
-      newState = state;
-      newState.gameParams.firstCardClicked = action.cardClicked;
-      return R.merge(state, newState);
+    case 'FIRST_CARD_CLICKED': {
+      let { gameParams } = state;
+      gameParams.firstCardClicked = action.cardClicked;
+      return R.merge(state, gameParams); }
   }
   return state;
 }

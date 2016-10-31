@@ -55,6 +55,9 @@ body{
     background-color: #fff;
 
 }
+.instantclosing{
+    transition: transform 0s;
+}
 .card figure {
   margin: 0;
   display: block;

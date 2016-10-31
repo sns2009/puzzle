@@ -18,7 +18,7 @@ export default class Samecards extends React.Component {
     return (<div>
       <h4>Choose quantity of same tiles to find:</h4>
 
-      <select value={this.props.chosenSameCard} style={{
+      <select value={this.props.chosenSameCardQuantity} style={{
         margin: '0 auto',
         width: '100px',
       }} id="sameCards" size="2">
@@ -30,6 +30,6 @@ export default class Samecards extends React.Component {
 }
 Samecards.propTypes = {
   sameCards: React.PropTypes.array,
-  chosenSameCard: React.PropTypes.number,
+  chosenSameCardQuantity: React.PropTypes.number,
   sameCardChose: React.PropTypes.func,
 };

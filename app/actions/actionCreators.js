@@ -28,10 +28,10 @@ export function setSameCards() {
     type: 'SET_SAME_CARDS',
   };
 }
-export function sameCardChose(chosenSameCard) {
+export function sameCardChose(chosenSameCardQuantity) {
   return {
     type: 'SAME_CARD_CHOSE',
-    chosenSameCard,
+    chosenSameCardQuantity,
   };
 }
 export function startGame(gameStarted) {

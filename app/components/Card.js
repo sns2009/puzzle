@@ -32,8 +32,8 @@ export default class Card extends React.Component {
       // - block gamefield and CLOSE cards, after anblack gamefield
 
 
-          if (cards[currentlyOpened[0]].imageId !==
-            cards[currentlyOpened[R.length(currentlyOpened) - 1]].imageId) {
+          if (cards[R.head(currentlyOpened)].imageId !==
+            cards[R.last(currentlyOpened)].imageId) {
             this.props.triggerGameField(false);
             setTimeout(() => {
               R.forEach(el => this.props.changeCardStatus(el, false), currentlyOpened);
@@ -41,22 +41,19 @@ export default class Card extends React.Component {
               this.props.incrementTries();
               this.props.triggerGameField(true);
             }, 1000);
-          } else if ((R.length(currentlyOpened)) === gameParams.chosenSameCard) {
+          } else if ((R.length(currentlyOpened)) === gameParams.chosenSameCardQuantity) {
             this.props.deleteCurrentlyOpened();
             this.props.incrementTries();
           }
         }
       }
     }
-    const mapIndexed = R.addIndex(R.map);
-    mapIndexed((card, i) => {
-      card.id = i;
-    }, cards);
+  
 
-    leftOpenedCards = R.filter(card => card.opened === false, cards);
+    leftOpenedCards = R.filter(R.propEq('opened',false), cards);
 
-    if (gameParams.chosenSameCard === R.length(leftOpenedCards)) {
-      if (leftOpenedCards[0].imageId === leftOpenedCards[R.length(leftOpenedCards) - 1].imageId) {
+    if (gameParams.chosenSameCardQuantity === R.length(leftOpenedCards)) {
+      if (R.length(R.uniq(R.pluck('imageId',leftOpenedCards))) === 1) {
         this.props.triggerGameField(false);
         setTimeout(() => {
           leftOpenedCards.forEach((el) => {
@@ -76,8 +73,8 @@ export default class Card extends React.Component {
     let cardOpened = 'card flipped';
     let cardClosed = 'card';
     if (!this.props.gameParams.firstCardClicked) {
-      cardOpened = 'instantcard flipped';
-      cardClosed = 'instantcard';
+      cardOpened = cardOpened.concat(' instantclosing');
+      cardClosed = cardClosed.concat(' instantclosing');
     }
     const cardFlipped = this.props.cards[this.props.cardNumber].opened ? cardOpened : cardClosed;
 

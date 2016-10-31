@@ -51,7 +51,7 @@ export default class Welcome extends React.Component {
             />
 
             <Samecards sameCards={this.props.store.gameParams.sameCards}
-              chosenSameCard={this.props.store.gameParams.chosenSameCard}
+              chosenSameCardQuantity={this.props.store.gameParams.chosenSameCardQuantity}
               sameCardChose={this.props.sameCardChose}
             />
 

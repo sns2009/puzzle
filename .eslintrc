@@ -5,8 +5,8 @@
     
     "no-mixed-spaces-and-tabs": "off",
     "no-mixed-operators": "off",
-    "max-len" : "120",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "no-tabs": "off"
     
   }
 }
