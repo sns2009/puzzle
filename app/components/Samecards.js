@@ -1,8 +1,14 @@
 import React from 'react';
-import R from 'ramda';
+import CSSModules from 'react-css-modules';
+import styles from '../../css/style.css';
 
 
-export default class Samecards extends React.Component {
+class Samecards extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);  
+  }
 
   onChange(e) {
     this.props.sameCardChose(+e.target.value);
@@ -12,16 +18,13 @@ export default class Samecards extends React.Component {
     const sameCards = this.props.sameCards;
     let sameCardsOption = [];
     sameCardsOption = sameCards.map((card, i) => {
-      return (<option onClick={this.onChange.bind(this)} key={i} value={card}>{card}</option>);
+      return (<option onClick={this.onChange} key={i} value={card}>{card}</option>);
     });
 
     return (<div>
       <h4>Choose quantity of same tiles to find:</h4>
 
-      <select value={this.props.chosenSameCardQuantity} style={{
-        margin: '0 auto',
-        width: '100px',
-      }} id="sameCards" size="2">
+      <select value={this.props.chosenSameCardQuantity} styleName="chooseBlock" size="2">
         {sameCardsOption}
       </select>
     </div>);
@@ -29,7 +32,9 @@ export default class Samecards extends React.Component {
 
 }
 Samecards.propTypes = {
-  sameCards: React.PropTypes.array,
+  sameCards: React.PropTypes.arrayOf(React.PropTypes.number),
   chosenSameCardQuantity: React.PropTypes.number,
   sameCardChose: React.PropTypes.func,
 };
+
+export default CSSModules(Samecards, styles);

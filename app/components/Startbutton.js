@@ -1,14 +1,17 @@
 import React from 'react';
 import R from 'ramda';
+import CSSModules from 'react-css-modules';
+import styles from '../../css/style.css';
 
 
-export default class Startbutton extends React.Component {
+class Startbutton extends React.Component {
 
   constructor(props) {
     super(props);
 	    this.state = {
 	    	lackOfParams: '',
 	    };
+    this.start = this.start.bind(this);
   	}
 
   	start() {
@@ -30,19 +33,26 @@ export default class Startbutton extends React.Component {
 
   	render() {
   		return (<div>
-    <button onClick={this.start.bind(this)} style={{ 
-      marginTop: '20px',
-      backgroundColor: '#f2f2f2'
-     }}>
+    <button onClick={this.start} styleName="startButton">
   			Here we go!
   	</button>
-    <div style={{ color: 'red', marginTop: '15px' }}>{this.state.lackOfParams}</div>
+    <div styleName="lackOfParams">{this.state.lackOfParams}</div>
   			</div>);
   	}
 
 }
+
 Startbutton.propTypes = {
-  gameParams: React.PropTypes.object,
+  gameParams: React.PropTypes.shape({
+    gameStarted: React.PropTypes.bool,
+    gameOver: React.PropTypes.bool,
+    prevFieldSize: React.PropTypes.number,
+    fieldSize: React.PropTypes.number,
+    sameCards: React.PropTypes.array,
+    chosenSameCardQuantity: React.PropTypes.number,
+    fieldBlocked: React.PropTypes.bool,
+    firstCardCliked: React.PropTypes.bool
+  }),
   setFieldSize: React.PropTypes.func,
   startGame: React.PropTypes.func,
   gameOver: React.PropTypes.func,
@@ -52,3 +62,5 @@ Startbutton.propTypes = {
   firstCardClicked: React.PropTypes.func,
   generateGame: React.PropTypes.func,
 };
+
+export default CSSModules(Startbutton, styles);

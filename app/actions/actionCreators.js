@@ -1,9 +1,3 @@
-export function setPrevious(previousCard) {
-  return {
-    type: 'SET_PREVIOUS',
-    previousCard,
-  };
-}
 export function changeCardsStatus(cardsToChange, status) {
   return {
     type: 'CHANGE_CARD_STATUS',

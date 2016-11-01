@@ -1,13 +1,20 @@
 import React from 'react';
 import R from 'ramda';
+import CSSModules from 'react-css-modules';
 import gameConfig from '../gameConfig';
+import styles from '../../css/style.css';
 
 const sizesToOptions = R.map(size => (<option key={size} value={size}>{size}x{size}</option>));
 
-export default class Fieldsize extends React.Component {
+class Fieldsize extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);  
+  }
 
   onChange(e) {
-    const dimention = e.target.value;
+    const dimention = +e.target.value;
     this.props.setPrevFieldSize(dimention);
     this.props.setSameCards();
   }
@@ -17,10 +24,7 @@ export default class Fieldsize extends React.Component {
     return (<div>
       <h4>Choose game field size:</h4>
 
-      <select style={{
-        margin: '0 auto',
-        width: '100px',
-      }} size="4" onChange={this.onChange.bind(this)}
+      <select styleName="chooseBlock" size="4" onChange={this.onChange}
       >
         {options}
       </select>
@@ -32,3 +36,4 @@ Fieldsize.propTypes = {
   setPrevFieldSize: React.PropTypes.func,
   setSameCards: React.PropTypes.func,
 };
+export default CSSModules(Fieldsize, styles);

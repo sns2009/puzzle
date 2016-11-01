@@ -1,8 +1,10 @@
 import React from 'react';
+import CSSModules from 'react-css-modules';
 import Card from './Card';
+import styles from '../../css/style.css';
 
 
-export default class Gamefield extends React.Component {
+class Gamefield extends React.Component {
 
   createCards() {
     const cards = this.props.cards;
@@ -28,11 +30,13 @@ export default class Gamefield extends React.Component {
   render() {
     const { gameParams } = this.props;
     const gameFieldSize = this.props.gameFieldSize;
-    let gameFieldContainer = (<div style={{ textAlign: 'center', lineHeight: `${gameFieldSize.height / 2}px` }}><h1>WELCOME</h1>
+    let gameFieldContainer = (<div style={{
+      lineHeight: `${gameFieldSize.height / 2}px` }}>
+      <h1>WELCOME</h1>
       <h2>Choose game params &#8594;</h2></div>);
     if (gameParams.gameStarted) gameFieldContainer = this.createCards();
 
-    return (<div className="gamefield" style={gameFieldSize}>
+    return (<div styleName="gamefield" style={gameFieldSize}>
       {
               gameFieldContainer
               }
@@ -42,10 +46,27 @@ export default class Gamefield extends React.Component {
 
 }
 Gamefield.propTypes = {
-  cards: React.PropTypes.array,
-  gameFieldSize: React.PropTypes.object,
-  gameParams: React.PropTypes.object,
-  currentlyOpened: React.PropTypes.array,
+  cards: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      id: React.PropTypes.number,
+      opened: React.PropTypes.bool,
+      imageId: React.PropTypes.number
+    })),
+  gameParams: React.PropTypes.shape({
+      gameStarted: React.PropTypes.bool,
+      gameOver: React.PropTypes.bool,
+      prevFieldSize: React.PropTypes.number,
+      fieldSize: React.PropTypes.number,
+      sameCards: React.PropTypes.array,
+      chosenSameCardQuantity: React.PropTypes.number,
+      fieldBlocked: React.PropTypes.bool,
+      firstCardCliked: React.PropTypes.bool
+    }),
+  currentlyOpened: React.PropTypes.arrayOf(React.PropTypes.number),
+  gameFieldSize: React.PropTypes.shape({
+    width: React.PropTypes.number,
+    height: React.PropTypes.number
+  }),
   triggerGameField: React.PropTypes.func,
   changeCardsStatus: React.PropTypes.func,
   deleteCurrentlyOpened: React.PropTypes.func,
@@ -54,3 +75,4 @@ Gamefield.propTypes = {
   addToCurrentlyOpened: React.PropTypes.func,
   firstCardClicked: React.PropTypes.func,
 };
+export default CSSModules(Gamefield, styles);

@@ -1,17 +1,19 @@
 import React from 'react';
+import CSSModules from 'react-css-modules';
 import Gamefield from './Gamefield';
 import Result from './Result';
 import Fieldsize from './Fieldsize';
 import Samecards from './Samecards';
 import Startbutton from './Startbutton';
+import styles from '../../css/style.css';
 
-export default class Welcome extends React.Component {
+class Welcome extends React.Component {
 
   render() {
     const startBlockWidth = this.props.windowWidth - this.props.gameFieldSize.width;
 
     return (
-      <div className="app clearfix">
+      <div styleName="app">
         <Gamefield cards={this.props.store.cards}
           gameFieldSize={this.props.gameFieldSize}
           gameParams={this.props.store.gameParams}
@@ -75,3 +77,4 @@ Welcome.defaultProps = {
   },
   windowWidth: document.documentElement.clientWidth,
 };
+export default CSSModules(Welcome, styles);
