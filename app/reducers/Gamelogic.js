@@ -11,8 +11,8 @@ export default function reducer(state = {
     fieldSize: null,
     sameCards: [],
     chosenSameCardQuantity: null,
-    fieldBlocked: true,
-    firstCardCliked: false,
+    fieldUnblocked: true,
+    firstCardClicked: false
   },
 
   gameResult: {
@@ -24,12 +24,12 @@ export default function reducer(state = {
     case 'SET_PREV_FIELD_SIZE': {
       let { gameParams } = state;
       gameParams.prevFieldSize = action.prevFieldSize;
-      return R.merge(state,gameParams); }
+      return R.merge(state,{gameParams}); }
 
     case 'SET_FIELD_SIZE': {
       let { gameParams } = state;
       gameParams.fieldSize = action.fieldSize;
-      return R.merge(state,gameParams); }
+      return R.merge(state,{gameParams}); }
 
     case 'SET_SAME_CARDS': {
       let { gameParams } = state;
@@ -45,17 +45,17 @@ export default function reducer(state = {
 
       gameParams.sameCards = sameCards;
       gameParams.chosenSameCardQuantity = sameCards[0];
-      return R.merge(state, gameParams); }
+      return R.merge(state, {gameParams}); }
 
     case 'SAME_CARD_CHOSE': {
       let { gameParams } = state;
       gameParams.chosenSameCardQuantity = action.chosenSameCardQuantity;
-      return R.merge(state, gameParams); }
+      return R.merge(state, {gameParams}); }
 
     case 'START_GAME': {
       let { gameParams } = state;
       gameParams.gameStarted = action.gameStarted;
-      return R.merge(state, gameParams); }
+      return R.merge(state, {gameParams}); }
 
     case 'GENERATE_GAME': {
       const fieldSize = state.gameParams.fieldSize;
@@ -81,59 +81,57 @@ export default function reducer(state = {
         };
       }, randomizedImages);
 
-      let newState = state;
-      newState.cards = cards;
-      return R.merge(state, newState); }
+      return R.merge(state, {cards}) 
+       }
 
-    case 'CHANGE_CARD_STATUS':
+    case 'CHANGE_CARD_STATUS':{
       let {cards} = state;
       const cardsToOpen = action.cardsToChange;
       R.forEach( cardId => {
         cards[cardId].opened = action.status
       },cardsToOpen);
-      let newState = state;
-      newState.cards = cards;
-      return R.merge(state, cards);
+      return R.merge(state, {cards}) 
+       }
 
     case 'GAME_OVER': {
       let { gameParams } = state;
       gameParams.gameOver = action.gameOver;
-      return R.merge(state, gameParams); }
+      return R.merge(state, {gameParams}); }
 
     case 'TRIGGER_GAMEFIELD': {
       let { gameParams } = state;
-      gameParams.fieldBlocked = action.status;
-      return R.merge(state, gameParams); }
+      gameParams.fieldUnblocked = action.status;
+      return R.merge(state, {gameParams}); }
 
-    case 'ADD_TO_CURRENTLY_OPENED': {
-      let newState = state;
-      newState.currentlyOpened.push(action.cardId);
-      return R.merge(state, newState); }
+    case 'ADD_TO_CURRENTLY_OPENED': { 
+      const {currentlyOpened} = state; 
+      currentlyOpened.push(action.cardId); 
+      return R.merge(state, {currentlyOpened}) }
 
     case 'DELETE_CURRENTLY_OPENED': {
-      let newState = state;
-      newState.currentlyOpened = [];
-      return R.merge(state, newState); }
+      let {currentlyOpened} = state;
+      currentlyOpened = [];
+      return R.merge(state, {currentlyOpened}) }
 
     case 'SET_PERFECT_TRIES_NUMBER': {
       let { gameResult } = state;
       gameResult.perfectGame = action.perfectTriesNumber - 1;
-      return R.merge(state, gameResult); }
+      return R.merge(state, {gameResult}); }
 
     case 'INCREMENT_TRIES': {
       let { gameResult } = state;
-      gameResult.userGame++;
-      return R.merge(state, gameResult); }
+      gameResult.userGame+=1;
+      return R.merge(state, {gameResult}); }
 
     case 'RESET_TRIES': {
       let { gameResult } = state;
       gameResult.userGame = 0;
-      return R.merge(state, gameResult); }
+      return R.merge(state, {gameResult}); }
 
     case 'FIRST_CARD_CLICKED': {
       let { gameParams } = state;
       gameParams.firstCardClicked = action.cardClicked;
-      return R.merge(state, gameParams); }
+      return R.merge(state, {gameParams}); }
   }
   return state;
 }

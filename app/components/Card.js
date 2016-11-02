@@ -14,13 +14,13 @@ class Card extends React.Component {
   }
   onCardClick(e) {
     const gameParams = this.props.gameParams;
-    const currentlyOpened = this.props.currentlyOpened;
     const cards = this.props.cards;
+    const currentlyOpened = this.props.currentlyOpened;
     let leftOpenedCards = [];
 
     e.preventDefault();
     this.props.firstCardClicked(true);
-    if (gameParams.fieldBlocked && !cards[this.props.cardNumber].opened) {
+    if (gameParams.fieldUnblocked && !cards[this.props.cardNumber].opened) {
       // Open card
       this.props.changeCardsStatus([this.props.cardNumber], true);
       // Add card to currently opened cards
@@ -35,9 +35,9 @@ class Card extends React.Component {
       // - don't clase, but erase curently opened array
 
       // If in currently opened cards some bg differs from other(s)
-      // - block gamefield and CLOSE cards, after anblack gamefield
+      // - block gamefield and CLOSE cards, after unblock gamefield
 
-
+      
         if (cards[R.head(currentlyOpened)].imageId !==
             cards[R.last(currentlyOpened)].imageId) {
           this.props.triggerGameField(false);
@@ -109,8 +109,8 @@ Card.propTypes = {
       fieldSize: React.PropTypes.number,
       sameCards: React.PropTypes.array,
       chosenSameCardQuantity: React.PropTypes.number,
-      fieldBlocked: React.PropTypes.bool,
-      firstCardCliked: React.PropTypes.bool
+      fieldUnblocked: React.PropTypes.bool,
+      firstCardClicked: React.PropTypes.bool
     }),
   currentlyOpened: React.PropTypes.arrayOf(React.PropTypes.number),
   gameFieldSize: React.PropTypes.shape({

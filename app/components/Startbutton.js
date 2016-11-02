@@ -50,8 +50,8 @@ Startbutton.propTypes = {
     fieldSize: React.PropTypes.number,
     sameCards: React.PropTypes.array,
     chosenSameCardQuantity: React.PropTypes.number,
-    fieldBlocked: React.PropTypes.bool,
-    firstCardCliked: React.PropTypes.bool
+    fieldUnblocked: React.PropTypes.bool,
+    firstCardClicked: React.PropTypes.bool
   }),
   setFieldSize: React.PropTypes.func,
   startGame: React.PropTypes.func,

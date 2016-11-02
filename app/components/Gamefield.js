@@ -37,9 +37,7 @@ class Gamefield extends React.Component {
     if (gameParams.gameStarted) gameFieldContainer = this.createCards();
 
     return (<div styleName="gamefield" style={gameFieldSize}>
-      {
-              gameFieldContainer
-              }
+      { gameFieldContainer }
     </div>);
   }
 
@@ -59,8 +57,8 @@ Gamefield.propTypes = {
       fieldSize: React.PropTypes.number,
       sameCards: React.PropTypes.array,
       chosenSameCardQuantity: React.PropTypes.number,
-      fieldBlocked: React.PropTypes.bool,
-      firstCardCliked: React.PropTypes.bool
+      fieldUnblocked: React.PropTypes.bool,
+      firstCardClicked: React.PropTypes.bool
     }),
   currentlyOpened: React.PropTypes.arrayOf(React.PropTypes.number),
   gameFieldSize: React.PropTypes.shape({

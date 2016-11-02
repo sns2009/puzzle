@@ -16,8 +16,7 @@ class Samecards extends React.Component {
 
   render() {
     const sameCards = this.props.sameCards;
-    let sameCardsOption = [];
-    sameCardsOption = sameCards.map((card, i) => {
+    const sameCardsOption = sameCards.map((card, i) => {
       return (<option onClick={this.onChange} key={i} value={card}>{card}</option>);
     });
 
