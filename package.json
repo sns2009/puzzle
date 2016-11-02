@@ -35,7 +35,6 @@
     "eslint-plugin-react": "^6.4.1",
     "html-webpack-plugin": "^2.7.1",
     "image-webpack-loader": "^3.0.0",
-    "react-css-modules": "^3.7.10",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.11",
     "webpack-dev-server": "^1.14.1"
