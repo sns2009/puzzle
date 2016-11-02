@@ -21,7 +21,7 @@ class Samecards extends React.Component {
     });
 
     return (<div>
-      <h4>Choose quantity of same tiles to find:</h4>
+      <h3>Choose quantity of same tiles to find:</h3>
 
       <select value={this.props.chosenSameCardQuantity} styleName="chooseBlock" size="2">
         {sameCardsOption}

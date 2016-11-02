@@ -22,7 +22,7 @@ class Fieldsize extends React.Component {
   render() {
     const options = sizesToOptions(R.range(gameConfig.smallestField, gameConfig.biggestField + 1));
     return (<div>
-      <h4>Choose game field size:</h4>
+      <h3>Choose game field size:</h3>
 
       <select styleName="chooseBlock" size="4" onChange={this.onChange}
       >
